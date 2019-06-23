@@ -1,0 +1,19 @@
+{
+  "name": "weight-journal-be",
+  "version": "1.0.0",
+  "description": "Back end application for the weight journal app",
+  "main": "index.js",
+  "scripts": {
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/build-week-weight-journal/weight-journal-BE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/build-week-weight-journal/weight-journal-BE/issues"
+  },
+  "homepage": "https://github.com/build-week-weight-journal/weight-journal-BE#readme"
+}
