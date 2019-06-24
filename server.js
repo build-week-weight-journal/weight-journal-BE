@@ -1,19 +1,20 @@
-const express = require('express');
+const express = require("express");
+const server = express();
+const helmet = require('helmet');
+const knex = require('knex');
+const knexConfig = require('./knexfile').development;
 
-const app = express();
+const db = knex(knexConfig);
 
-app.get('/', (req, res) => {
-    res.send('this is working');
-})
+server.use(helmet());
+server.use(express.json());
 
-app.post('/signin', (req, res) => {
-    res.json('signing')
-})
+// sanity check route
+server.get("/", (req, res) => {
+  res.status(200).json({ hello: "World!" });
+});
 
-app.listen(3000, ()=> {
-    console.log('app is running on port 3000');
-})
-
+module.exports = server; 
 
 /*
 
@@ -34,5 +35,7 @@ app.listen(3000, ()=> {
 /myjournal/:userid --> POST = journal // Post a new journal 
 
 /myjournal/:userid --> PUT  = journal // Update journal 
+
+/myjournal/:userid --> DELETE  = journal // DELETE journal 
 
 */
