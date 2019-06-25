@@ -73,6 +73,40 @@ server.get('/api/users', protected, (req, res) => {
 });
 
 
-// [GET] /api/
+// [GET] /api/users - get users by id
+server.get('/api/users/:id', protected, (req, res) => {
+    let id = req.params.id;
 
+    Users.findById(id)
+        .then(user => {
+            if (user) {
+                res.status(200).json({ users, decodedToken: req.decodedToken });
+            } else {
+                res.status(400).json({ message: "The specified user does not exist." });
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err.message);
+        });
+});
+
+// [PUT] /api/userid - udpate user info 
+server.put('/api/users/:id', (req, res) => {
+    const id = req.params.id;
+    const changes = req.body;
+
+    Users.update(id, changes)
+        .then(changes => {
+            if (changes) {
+                res.status(200).json({ message: "User detail successfully updated." });
+            } else {
+                res.status(404).json({ message: "The specified user does not exist." });
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err.message);
+        });
+});
+
+const port = process.env.PORT || 3000;
 server.listen(port, () => console.log(`\n === Running on ${port} === \n`));  
