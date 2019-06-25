@@ -1,13 +1,22 @@
 
 exports.seed = function(knex, Promise) {
-  // Deletes ALL existing entries
-  return knex('users').del()
-    .then(function () {
+  // the 00-cleanup.js seed already deleted all records
+  // we just worry about seeding records in all other seeds
       // Inserts seed entries
       return knex('users').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+        { username: 'Bob', 
+          password: 'test',
+          email: 'bob@test.com',
+          age: 21,
+          height: '6ft 2in',
+          weight: 173
+        },
+        { username: 'Charlie', 
+          password: 'test',
+          email: 'charlie@test.com',
+          age: 23,
+          height: '5ft 3in',
+          weight: 173
+        }
       ]);
-    });
 };
