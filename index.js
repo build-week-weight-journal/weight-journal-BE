@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Users = require('./users-model');
 const Lifts = require('./lifts-model');
-const protected = require('./middleware');
+const restricted = require('./middleware');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -68,7 +68,7 @@ server.post('/api/login', (req, res) => {
 });
 
 // [GET] /api/users - protect this endpoint so only logged in users can see it
-server.get('/api/users', protected, (req, res) => {
+server.get('/api/users', restricted, (req, res) => {
     Users.find('users')
         .select('id', 'username')
         .then(users => {
@@ -80,7 +80,7 @@ server.get('/api/users', protected, (req, res) => {
 });
 
 // [GET] /api/users - get users by id
-server.get('/api/users/:id', protected, (req, res) => {
+server.get('/api/users/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     Users.findById(id)
@@ -134,7 +134,7 @@ server.delete('/api/users/:id', (req, res) => {
 
 /* lifts */
 // [GET] /api/lifts - get all lifts
-server.get('/api/lifts', protected, (req, res) => {
+server.get('/api/lifts', restricted, (req, res) => {
     Lifts.find('lifts')
         .select('id', 'user_id')
         .then(lifts => {
