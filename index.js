@@ -6,7 +6,8 @@ const Lifts = require('./lifts-model');
 const protected = require('./middleware');
 const cors = require('cors');
 
-const secret = 'bor@t';
+require('dotenv').config();
+const secret = process.env.SECRET || 'Heroku secret'
 
 server.use(cors());
 
@@ -247,5 +248,5 @@ server.delete('/api/lifts/:id', (req, res) => {
         });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 server.listen(port, () => console.log(`\n === Running on ${port} === \n`));
