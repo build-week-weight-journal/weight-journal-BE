@@ -4,13 +4,13 @@
   "description": "Back end application for the weight journal app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon index.js",
     "test": "cross-env DB_ENV=testing jest --watchAll --verbose"
   },
   "jest": {
     "testEnvironment": "node"
   },
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/build-week-weight-journal/weight-journal-BE.git"
   },
@@ -23,6 +23,7 @@
   "devDependencies": {
     "cross-env": "^5.2.0",
     "jest": "^24.8.0",
+    "knex-cleaner": "^1.1.4",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   },
