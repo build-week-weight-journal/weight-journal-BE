@@ -175,6 +175,26 @@ server.get('/api/users/:id/lifts', async (req, res) => {
     }
 });
 
+// [GET] /api/lifts - get all lifts by lift name  
+server.get('/api/users/:id/lifts/:name', async (req, res) => {
+    const userId = req.params.id;
+    const name = req.params.name;
+
+    Lifts.getLiftsByName(userId, name)
+    .then(lift => {
+      if (lift) {
+        res.status(200).json(lift);
+      } else {
+        res
+          .status(404)
+          .json({ message: 'The specified lift does not exist.' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json(err.message);
+    });
+});
+
 // [POST] /api/lifts - add a new lift 
 server.post('/api/lifts', (req, res) => {
     const newLift = req.body;

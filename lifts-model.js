@@ -6,6 +6,7 @@ module.exports = {
     findBy,
     findById,
     getUserLifts,
+    getLiftsByName,
     update,
     remove
 };
@@ -43,6 +44,23 @@ function getUserLifts(userId) {
             'l.notes'
         )
         .where('l.user_id', userId);
+}
+
+function getLiftsByName(userId,lift) {
+    return db('lifts as l')
+        .join('users as u', 'u.id', 'l.user_id')
+        .select(
+            'u.username',
+            'l.id',
+            'l.name',
+            'l.sets',
+            'l.weight',
+            'l.repsPerSet',
+            'l.bodyRegion',
+            'l.created_at',
+            'l.notes'
+        )
+        .where('l.name', lift);
 }
 
 function update(id, changes) {
