@@ -181,18 +181,18 @@ server.get('/api/users/:id/lifts/:name', async (req, res) => {
     const name = req.params.name;
 
     Lifts.getLiftsByName(userId, name)
-    .then(lift => {
-      if (lift) {
-        res.status(200).json(lift);
-      } else {
-        res
-          .status(404)
-          .json({ message: 'The specified lift does not exist.' });
-      }
-    })
-    .catch(err => {
-      res.status(500).json(err.message);
-    });
+        .then(lift => {
+            if (lift) {
+                res.status(200).json(lift);
+            } else {
+                res
+                    .status(404)
+                    .json({ message: 'The specified lift does not exist.' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err.message);
+        });
 });
 
 // [POST] /api/lifts - add a new lift 
@@ -237,15 +237,15 @@ server.put('/api/lifts/:id', (req, res) => {
 // [DELETE] /api/lifts/:id - Delete lift 
 server.delete('/api/lifts/:id', (req, res) => {
     const id = req.params.id;
-  
+
     Lifts.remove(id)
-      .then(count => {
-        res.status(200).json({ message:'Lift exercise successfully deleted.' });
-      })
-      .catch(err => {
-        res.status(500).json(err.message);
-      });
-  });
+        .then(count => {
+            res.status(200).json({ message: 'Lift exercise successfully deleted.' });
+        })
+        .catch(err => {
+            res.status(500).json(err.message);
+        });
+});
 
 const port = process.env.PORT || 3000;
 server.listen(port, () => console.log(`\n === Running on ${port} === \n`));

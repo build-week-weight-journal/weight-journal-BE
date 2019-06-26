@@ -46,7 +46,7 @@ function getUserLifts(userId) {
         .where('l.user_id', userId);
 }
 
-function getLiftsByName(userId,lift) {
+function getLiftsByName(userId, lift) {
     return db('lifts as l')
         .join('users as u', 'u.id', 'l.user_id')
         .select(
