@@ -5,7 +5,9 @@ module.exports = {
     find,
     findBy,
     findById,
-    update
+    getUserLifts,
+    update,
+    remove
 };
 
 function find() {
@@ -26,8 +28,25 @@ function findById(id) {
     return db('lifts').where({ id }).first();
 }
 
+function getUserLifts(userId) {
+    return db('lifts as l')
+        .join('users as u', 'u.id', 'l.user_id')
+        .select(
+            'u.username',
+            'l.id',
+            'l.name',
+            'l.sets',
+            'l.weight',
+            'l.repsPerSet',
+            'l.bodyRegion',
+            'l.created_at',
+            'l.notes'
+        )
+        .where('l.user_id', userId);
+}
+
 function update(id, changes) {
-    return db("lifts")
+    return db('lifts')
         .where({ id })
         .update(changes)
         .then(count => {
@@ -38,4 +57,11 @@ function update(id, changes) {
             }
         });
 
+}
+
+function remove(id) {
+    return db('lifts')
+        .where({ id })
+        .first()
+        .del();
 }
