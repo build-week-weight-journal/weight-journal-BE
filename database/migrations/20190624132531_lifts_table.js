@@ -17,6 +17,7 @@ exports.up = function(knex, Promise) {
     table.string('bodyRegion', 128).notNullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.text('notes').notNullable();
+    table.string('src_url', 511);
   });
 };
 
