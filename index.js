@@ -248,5 +248,7 @@ server.delete('/api/lifts/:id', (req, res) => {
         });
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 6000;
 server.listen(port, () => console.log(`\n === Running on ${port} === \n`));
+
+module.exports = server;
