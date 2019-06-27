@@ -14,9 +14,9 @@ exports.up = function(knex, Promise) {
     table.integer('sets', 128).notNullable();
     table.integer('weight', 128).notNullable();
     table.integer('repsPerSet', 128).notNullable();
-    table.string('bodyRegion', 128).notNullable();
+    table.string('bodyRegion', 128);
     table.timestamp('created_at').defaultTo(knex.fn.now());
-    table.text('notes').notNullable();
+    table.text('notes');
     table.string('src_url', 511);
   });
 };
