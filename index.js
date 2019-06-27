@@ -27,11 +27,14 @@ function generateToken(user) {
 // [POST] /api/register
 server.post('/api/register', (req, res) => {
     let user = req.body;
+    console.log(user)
     const hash = bcrypt.hashSync(user.password, 10);
+    console.log(hash)
     user.password = hash;
 
     Users.add(user)
         .then(registered => {
+            console.log(registered)
             const token = generateToken(registered);
             res.status(201).json({
                 registered,
@@ -39,6 +42,7 @@ server.post('/api/register', (req, res) => {
             });
         })
         .catch(error => {
+            console.log(error)
             res.status(500).json(error);
         });
 });

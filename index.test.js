@@ -10,18 +10,15 @@ describe('Testing environment setup', () => {
 
 describe('authorization', () => {
     describe('/REGISTER', () => {
-        afterEach(async () => {
+       afterEach(async () => {
             await db('users').truncate();
         });
 
-        it('/register returns 201, success', () => {
-            return request(server)
+        it('/register returns 201, success', async () => {
+            const reqServer = await request(server)
                 .post('/api/register')
-                .send({ username: 'spongebob', password: 'pass' })
-                .expect(201)
-                .then(res => {
-                    expect(res.status).toBe(201);
-                });
+                .send({ 'username': 'spongebob', 'password': 'pass' })    
+            expect(reqServer.status).toEqual(201)
         });
 
         it('/register returns 401, requires username and password', () => {
