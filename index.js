@@ -181,9 +181,9 @@ server.get('/api/users/:id/lifts', async (req, res) => {
 });
 
 // [GET] /api/lifts - get all lifts by lift name  
-server.get('/api/users/:id/lifts/:name', async (req, res) => {
+server.get('/api/users/:id/liftsearch', async (req, res) => {
     const userId = req.params.id;
-    const name = req.params.name;
+    const name = req.body.name;
 
     Lifts.getLiftsByName(userId, name)
         .then(lift => {
