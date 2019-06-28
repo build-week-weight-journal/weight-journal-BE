@@ -27,20 +27,31 @@ function generateToken(user) {
 // [POST] /api/register
 server.post('/api/register', (req, res) => {
     let user = req.body;
-    const hash = bcrypt.hashSync(user.password, 10);
-    user.password = hash;
+    //console.log(user)
 
-    Users.add(user)
-        .then(registered => {
-            const token = generateToken(registered);
-            res.status(201).json({
-                registered,
-                token
-            });
-        })
-        .catch(error => {
-            res.status(500).json(error);
+    if (!user.username || !user.password) {
+        res.status(401).json({
+            message: 'Please provide a username and password for this user.'
         });
+    } else {
+        const hash = bcrypt.hashSync(user.password, 10);
+        // console.log(hash)
+        user.password = hash;
+        
+        Users.add(user)
+            .then(registered => {
+                // console.log(registered)
+                const token = generateToken(registered);
+                res.status(201).json({
+                    registered,
+                    token
+                });
+            })
+            .catch(error => {
+                // console.log(error)
+                res.status(500).json(error);
+            });
+    }
 });
 
 // [POST] /api/login
@@ -248,5 +259,7 @@ server.delete('/api/lifts/:id', (req, res) => {
         });
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 7000;
 server.listen(port, () => console.log(`\n === Running on ${port} === \n`));
+
+module.exports = server;
