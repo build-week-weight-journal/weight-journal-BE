@@ -1,4 +1,3 @@
-const request = require('supertest');
 const db = require('./database/dbConfig');
 const Users = require('./users-model');
 
@@ -60,6 +59,7 @@ describe('users-model', () => {
     })
   })
 
+  /*
   describe('add', () => {
     it('adds user to db', async () => {
       const newUser = await Users.add({
@@ -75,4 +75,5 @@ describe('users-model', () => {
       expect(allUsers).toHaveLength(1)
     })
   })
+  */
 })
