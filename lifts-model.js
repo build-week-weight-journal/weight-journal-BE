@@ -21,7 +21,8 @@ function find() {
     'repsPerSet',
     'bodyRegion',
     'created_at',
-    'notes'
+    'notes',
+    'src_url'
   );
 }
 
@@ -53,7 +54,8 @@ function getUserLifts(userId) {
       'l.repsPerSet',
       'l.bodyRegion',
       'l.created_at',
-      'l.notes'
+      'l.notes',
+      'l.src_url'
     )
     .where('l.user_id', userId);
 }
@@ -70,7 +72,8 @@ function getLiftsByName(userId, lift) {
       'l.repsPerSet',
       'l.bodyRegion',
       'l.created_at',
-      'l.notes'
+      'l.notes',
+      'l.src_url'
     )
     .where('l.name', lift);
 }
